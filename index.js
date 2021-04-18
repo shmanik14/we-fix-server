@@ -91,7 +91,7 @@ client.connect(err => {
     })
 
     app.get("/users", (req,res) => {
-        orderCollection.find({})
+        userCollection.find({})
         .toArray((err, documents) => {
         res.send(documents);
         })
