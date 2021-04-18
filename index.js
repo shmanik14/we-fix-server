@@ -18,10 +18,20 @@ client.connect(err => {
     const serviceCollection = client.db("weFix").collection("services");
     const testimonialCollection = client.db("weFix").collection("testimonials");
     const orderCollection = client.db("weFix").collection("orders");
+    const userCollection = client.db("weFix").collection("users");
 
     app.post('/addService', (req,res) => {
         const service = req.body;
         serviceCollection.insertOne(service)
+        .then(result => {
+            console.log(result);
+            res.send(result.insertedCount > 0)
+        })
+    })
+
+    app.post('/addUser', (req,res) => {
+        const user = req.body;
+        userCollection.insertOne(user)
         .then(result => {
             console.log(result);
             res.send(result.insertedCount > 0)
@@ -109,7 +119,7 @@ client.connect(err => {
 })
 
 app.get('/', (req, res) => {
-    res.send('Hello WeFix')
+    res.send('Hello, WeFix')
   })
   
 app.listen(port)
