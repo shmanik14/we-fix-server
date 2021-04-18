@@ -90,6 +90,13 @@ client.connect(err => {
         })
     })
 
+    app.get("/users", (req,res) => {
+        orderCollection.find({})
+        .toArray((err, documents) => {
+        res.send(documents);
+        })
+    })
+
     app.get("/userOrders", (req,res) => {
         orderCollection.find({email: req.query.email})
         .toArray((err, documents) => {
