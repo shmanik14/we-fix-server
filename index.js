@@ -104,6 +104,13 @@ client.connect(err => {
         })
     })
 
+    app.get("/checkAdmin", (req,res) => {
+        userCollection.find({email: req.query.email})
+        .toArray((err, documents) => {
+        res.send(documents);
+        })
+    })
+
     app.delete("/delete/:id", (req, res) => {
         serviceCollection.findOneAndDelete({_id: objectId(req.params.id)})
         .then(result => {
